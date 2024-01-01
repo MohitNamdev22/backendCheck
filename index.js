@@ -29,19 +29,17 @@ function calculateMul(counter){
 app.use(bodyParser.json());
 
 function handleFirstRequest(req,res){
-    console.log(req.body) ;
-    var counter = req.body.counter;
-    if(counter<1000){
-        var calculatedSum = calculateSum(counter);
-    console.log(calculatedSum)
-    var answer = "the sum is " +calculatedSum;
-    res.send(answer);
-
-    }
-    else{
-        res.status(411).send("Very big number");
-    }
     
+    var counter = req.body.counter;
+    
+    var calculatedSum = calculateSum(counter);
+    var calculatedMul = calculateMul(counter);
+
+    var answerObject = {
+        sum: calculatedSum,
+        mul: calculatedMul,
+    }
+    res.status(200).send(answerObject)
 }
 
 function handleUser(req,res){
